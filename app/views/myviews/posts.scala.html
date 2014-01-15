@@ -1,0 +1,31 @@
+@(message: String, records: List[Post], menuPosts: List[Post], comments: List[Comment])
+
+@layout("Üdvözlet!") {
+    <h2>@message</h2>
+
+    <section id="menuLeft">
+        @for(post <- menuPosts) {
+        <li><a href="/posts/@post.id">@post.text</a></li>
+        }
+    </section>
+
+    <section id="content">
+
+        @for(post <- records) {
+        <article class="post">
+            <h3>@post.text</h3>
+            <sub>#@post.id &copy; @post.author</sub>
+        </article>
+        }
+
+        <h3>Hozzászólások</h3>
+
+        @for(comment <- comments) {
+        <article class="comment">
+            <h4>#@comment.id &copy; @comment.login <small>@comment.date</small></h4>
+            <div>@comment.text</div>
+        </article>
+        }
+    </section>
+
+}
